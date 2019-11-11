@@ -1,0 +1,18 @@
+{
+  "name": "jsc-bypass-on-screen-keyboard-browser-extension",
+  "description": "Browser extension to bypass useless and annoying login page on-screen keyboard on Jogos Santa Casa website. See #github-page#",
+  "manifest_version": 2,
+  "homepage_url": "https://github.com/desperate-man",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.jogossantacasa.pt/*"],
+      "js": ["tab.js"]
+    }
+  ]
+}

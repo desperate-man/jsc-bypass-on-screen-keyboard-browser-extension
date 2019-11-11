@@ -1,0 +1,5 @@
+package.json
+*.scss
+stats.json
+.lintstagedrc.json
+dist

@@ -1,0 +1,20 @@
+{
+  "root": true,
+  "parserOptions": {
+    "ecmaVersion": 9,
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "prefer-promise-reject-errors": "off",
+    "import/no-named-as-default": "off",
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": ["*node_modules*", "*/src/**"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "*.js": "eslint",
+  "*.json": "prettier --ignore-path .prettierignore --list-different"
+}
