@@ -1,0 +1,9 @@
+export const TARGET_SEARCH_INTERVAL = 1500;
+export const JSC_CLASS_NAME_KEYBOARD = 'keyboardBox';
+export const JSC_CLASS_NAME_IFRAME = 'cboxIframe';
+export const JSC_INPUT_USERNAME = 'user';
+export const JSC_INPUT_PASSWORD = 'pwd';
+export const JSC_INPUT_HIDDEN_PASSWORD = 'hpwd';
+export const JSC_FAKE_INPUT_PASSWORD = 'fake-pwd';
+export const CHAR_SUFFIX_UPPERCASE = '-uc';
+export const CHAR_SUFFIX_LOWERCASE = '-lc';

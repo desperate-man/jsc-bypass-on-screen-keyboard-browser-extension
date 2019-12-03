@@ -1,17 +1,17 @@
-import { CHAR_SUFFIX_UPPERCASE, CHAR_SUFFIX_LOWERCASE } from './constants';
+import { CHAR_SUFFIX_UPPERCASE, CHAR_SUFFIX_LOWERCASE } from '../shared/constants';
+
+export const getCharacterKey = char => {
+  if (!isNaN(char * 1)) {
+    return char;
+  } else if (char !== char.toUpperCase() && char === char.toLowerCase()) {
+    return `${char}${CHAR_SUFFIX_UPPERCASE}`;
+  }
+
+  return `${char}${CHAR_SUFFIX_LOWERCASE}`;
+};
 
 export const getSecretCharacters = secretInputs => {
   if (secretInputs) {
-    const getCharacterKey = char => {
-      if (!isNaN(char * 1)) {
-        return char;
-      } else if (char !== char.toUpperCase() && char === char.toLowerCase()) {
-        return `${char}${CHAR_SUFFIX_UPPERCASE}`;
-      }
-
-      return `${char}${CHAR_SUFFIX_LOWERCASE}`;
-    };
-
     return secretInputs.reduce(
       (result, elem) => ({
         ...result,

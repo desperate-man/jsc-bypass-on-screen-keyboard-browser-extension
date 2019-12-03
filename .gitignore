@@ -3,3 +3,5 @@ node_modules
 /release
 Archive.zip
 dist.zip
+/.vscode
+.DS_Store

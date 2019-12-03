@@ -1,9 +1,9 @@
-import { onIdentifiedTarget } from './actions';
+import { startWaitingForLoginForm, startTrackingCredentials } from './actions';
 
-function waitForLoginPage() {
-  onIdentifiedTarget(() => {
-    document.body.style.border = '5px solid red';
+function waitForLoginForm() {
+  startWaitingForLoginForm(() => {
+    startTrackingCredentials();
   });
 }
 
-waitForLoginPage();
+waitForLoginForm();

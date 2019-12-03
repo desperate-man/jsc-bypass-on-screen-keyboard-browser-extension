@@ -1,15 +1,29 @@
-import { findTarget, getUsernameInput, getPasswordInput, getHiddenPasswordInput } from './finder';
-import { getSecretCharacters } from './decoder';
-import { TARGET_SEARCH_INTERVAL } from './constants';
+import { findLoginForm, getPasswordInput, getHiddenPasswordInput, getOrCreateFakePasswordInput } from './elem-finder';
+import { getCharacterKey, getSecretCharacters } from './decoder';
+import { TARGET_SEARCH_INTERVAL } from '../shared/constants';
 
 let ownerDocument = null;
 let secretInputs = null;
 
-export function onIdentifiedTarget(callback) {
-  const finder = findTarget((foundOwnerDocument, foundSecretInputs) => {
-    ownerDocument = foundOwnerDocument;
-    secretInputs = foundSecretInputs;
-    callback();
+function onPasswordChanged(e, passwordInput, hiddenPasswordInput, charsToSecretKeysMap) {
+  const hiddenPassword = e.target.value
+    .split('')
+    .reduce((result, char) => (result += charsToSecretKeysMap[getCharacterKey(char)]), '');
+
+  passwordInput.value = e.target.value;
+  hiddenPasswordInput.value = hiddenPassword;
+}
+
+export function startWaitingForLoginForm(onLoginFormFound) {
+  const finder = findLoginForm((foundOwnerDocument, foundSecretInputs) => {
+    if (ownerDocument !== foundOwnerDocument) {
+      ownerDocument = foundOwnerDocument;
+      secretInputs = foundSecretInputs;
+
+      if (onLoginFormFound) {
+        onLoginFormFound();
+      }
+    }
   });
 
   const checkInterval = setInterval(finder, TARGET_SEARCH_INTERVAL);
@@ -25,23 +39,20 @@ export function onIdentifiedTarget(callback) {
   };
 }
 
-export function enterLoginDetails(username, password) {
-  if (secretInputs && username && password) {
-    const usernameInput = getUsernameInput(ownerDocument);
-    const passwordInput = getPasswordInput(ownerDocument);
-    const hiddenPasswordInput = getHiddenPasswordInput(ownerDocument);
+export function startTrackingCredentials() {
+  const passwordInput = getPasswordInput(ownerDocument);
+  const hiddenPasswordInput = getHiddenPasswordInput(ownerDocument);
+
+  if (secretInputs && passwordInput && hiddenPasswordInput) {
+    const fakePasswordInput = getOrCreateFakePasswordInput(ownerDocument);
     const charsToSecretKeysMap = getSecretCharacters(secretInputs);
 
     if (Object.keys(charsToSecretKeysMap).length) {
-      [passwordInput, hiddenPasswordInput].forEach(elem => elem.removeAttribute('readonly'));
+      [passwordInput, hiddenPasswordInput, fakePasswordInput].forEach(elem => elem.removeAttribute('readonly'));
 
-      const hiddenPassword = password
-        .split('')
-        .reduce((result, char) => (result += charsToSecretKeysMap[getCharacterKey(char)]), '');
-
-      usernameInput.value = username;
-      passwordInput.value = password;
-      hiddenPasswordInput.value = hiddenPassword;
+      fakePasswordInput.addEventListener('input', e =>
+        onPasswordChanged(e, passwordInput, hiddenPasswordInput, charsToSecretKeysMap)
+      );
     }
   }
 }
