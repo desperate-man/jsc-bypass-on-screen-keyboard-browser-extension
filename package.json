@@ -56,5 +56,9 @@
     "web-ext": "^3.1.1",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.10"
+  },
+  "resolutions": {
+    "terser-webpack-plugin": "^1.4.2",
+    "serialize-javascript": ">=2.1.1"
   }
 }
