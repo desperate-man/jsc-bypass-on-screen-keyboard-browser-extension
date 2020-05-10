@@ -1,3 +1,5 @@
+[![Google Chrome Webstore](https://developer.chrome.com/webstore/images/ChromeWebStore_Badge_v2_206x58.png)](https://chrome.google.com/webstore/detail/jogos-santa-casa-bypass-v/mllldoamkfoggfinimnefclegkmdkbbl)[![Firefox Addons](https://addons.cdn.mozilla.net/static/img/addons-buttons/AMO-button_1.png)](https://github.com/desperate-man/jsc-bypass-virtual-keyboard-browser-extension/releases)
+
 ## Description
 
 Browser extension for Chrome and Firefox that helps to log in to [Jogos Santa Casa](https://www.jogossantacasa.pt/) website without virtual keyboard.
@@ -63,6 +65,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## Trademarks
+## Trademarks & Credits
 
 Jogos Santa Casa and https://www.jogossantacasa.pt/ are Copyright © Jogos Santa Casa.
